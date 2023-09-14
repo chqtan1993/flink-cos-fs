@@ -16,7 +16,7 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <!-- hadoop.shading.prefix 必须跟 hadoop shaded module 中的-->
-        <hadoop.shading.prefix>org.apache.flink.fs.shaded.hadoop3</hadoop.shading.prefix>
+<!--        <hadoop.shading.prefix>org.apache.flink.fs.shaded.hadoop3</hadoop.shading.prefix>-->
         <cos.shading.prefix>org.apache.flink.fs.coshadoop</cos.shading.prefix>
         <maven.deploy.skip>false</maven.deploy.skip>
     </properties>
@@ -69,15 +69,15 @@
                                 load way, to direct load shade plugins so that can always shade it.
                                 if you need shade hadoop and use ranger at same time, it seems not work for now.
                                  -->
-                                <relocation>
-                                    <pattern>org.apache.hadoop</pattern>
-                                    <shadedPattern>${hadoop.shading.prefix}.org.apache.hadoop</shadedPattern>
-                                    <excludes>
-                                        <!-- avoid relocate fs lock class cause network can not load real jar-->
-                                        <exclude>org.apache.hadoop.ipc.**</exclude>
-                                        <exclude>org.apache.hadoop.fs.cosn.ranger.protocol.**</exclude>
-                                    </excludes>
-                                </relocation>
+<!--                                <relocation>-->
+<!--                                    <pattern>org.apache.hadoop</pattern>-->
+<!--                                    <shadedPattern>${hadoop.shading.prefix}.org.apache.hadoop</shadedPattern>-->
+<!--                                    <excludes>-->
+<!--                                        &lt;!&ndash; avoid relocate fs lock class cause network can not load real jar&ndash;&gt;-->
+<!--                                        <exclude>org.apache.hadoop.ipc.**</exclude>-->
+<!--                                        <exclude>org.apache.hadoop.fs.cosn.ranger.protocol.**</exclude>-->
+<!--                                    </excludes>-->
+<!--                                </relocation>-->
 
                                 <!-- used by ranger to load provider class, which must test for other provider-->
                                 <!--
@@ -87,23 +87,23 @@
                                 </relocation>
                                 -->
 
-                                <relocation>
-                                    <pattern>org.apache.commons</pattern>
-                                    <shadedPattern>${hadoop.shading.prefix}.org.apache.commons</shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>com.google.common</pattern>
-                                    <shadedPattern>${hadoop.shading.prefix}.com.google.common</shadedPattern>
-                                </relocation>
+<!--                                <relocation>-->
+<!--                                    <pattern>org.apache.commons</pattern>-->
+<!--                                    <shadedPattern>${hadoop.shading.prefix}.org.apache.commons</shadedPattern>-->
+<!--                                </relocation>-->
+<!--                                <relocation>-->
+<!--                                    <pattern>com.google.common</pattern>-->
+<!--                                    <shadedPattern>${hadoop.shading.prefix}.com.google.common</shadedPattern>-->
+<!--                                </relocation>-->
 
-                                <relocation>
-                                    <pattern>com.qcloud</pattern>
-                                    <shadedPattern>${cos.shading.prefix}.shaded.com.qcloud</shadedPattern>
-                                    <excludes>
-                                        <!-- avoid relocate fs lock class cause network can not load real jar-->
-                                        <exclude>com.qcloud.chdfs.**</exclude>
-                                    </excludes>
-                                </relocation>
+<!--                                <relocation>-->
+<!--                                    <pattern>com.qcloud</pattern>-->
+<!--                                    <shadedPattern>${cos.shading.prefix}.shaded.com.qcloud</shadedPattern>-->
+<!--                                    <excludes>-->
+<!--                                        &lt;!&ndash; avoid relocate fs lock class cause network can not load real jar&ndash;&gt;-->
+<!--                                        <exclude>com.qcloud.chdfs.**</exclude>-->
+<!--                                    </excludes>-->
+<!--                                </relocation>-->
                                 <relocation>
                                     <pattern>org.apache.flink.runtime.fs.hdfs</pattern>
                                     <shadedPattern>${cos.shading.prefix}.common</shadedPattern>
@@ -114,6 +114,15 @@
                                     <shadedPattern>${cos.shading.prefix}.common</shadedPattern>
                                 </relocation>
                             </relocations>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>org/apache/hadoop/**</exclude>
+                                        <exclude>com/qcloud/**</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
                         </configuration>
                     </execution>
                 </executions>

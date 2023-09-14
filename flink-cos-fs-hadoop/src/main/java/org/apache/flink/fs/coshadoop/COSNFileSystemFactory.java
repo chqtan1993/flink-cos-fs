@@ -109,7 +109,7 @@ public class COSNFileSystemFactory extends AbstractCOSFileSystemFactory {
         if (flinkConfig == null) {
             return conf;
         }
-        Boolean useFlinkShade = true;
+        Boolean useFlinkShade = false;
         // if shade org.apache.hadoop targetPrefix may be changed with shade prefix.
         String targetPrefix = "org.apache.hadoop.fs";
 
