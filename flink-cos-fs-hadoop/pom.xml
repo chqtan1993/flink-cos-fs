@@ -16,7 +16,7 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <!-- hadoop.shading.prefix 必须跟 hadoop shaded module 中的-->
-<!--        <hadoop.shading.prefix>org.apache.flink.fs.shaded.hadoop3</hadoop.shading.prefix>-->
+        <hadoop.shading.prefix>org.apache.flink.fs.shaded.hadoop3</hadoop.shading.prefix>
         <cos.shading.prefix>org.apache.flink.fs.coshadoop</cos.shading.prefix>
         <maven.deploy.skip>false</maven.deploy.skip>
     </properties>
@@ -87,14 +87,14 @@
                                 </relocation>
                                 -->
 
-<!--                                <relocation>-->
-<!--                                    <pattern>org.apache.commons</pattern>-->
-<!--                                    <shadedPattern>${hadoop.shading.prefix}.org.apache.commons</shadedPattern>-->
-<!--                                </relocation>-->
-<!--                                <relocation>-->
-<!--                                    <pattern>com.google.common</pattern>-->
-<!--                                    <shadedPattern>${hadoop.shading.prefix}.com.google.common</shadedPattern>-->
-<!--                                </relocation>-->
+                                <relocation>
+                                    <pattern>org.apache.commons</pattern>
+                                    <shadedPattern>${hadoop.shading.prefix}.org.apache.commons</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.google.common</pattern>
+                                    <shadedPattern>${hadoop.shading.prefix}.com.google.common</shadedPattern>
+                                </relocation>
 
 <!--                                <relocation>-->
 <!--                                    <pattern>com.qcloud</pattern>-->
